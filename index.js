@@ -12,18 +12,19 @@ server.use(helmet());
 const port = 3300;
 
 server.post('/api/zoos', (req, res) => {
-  const zoo = req.body;
-  console.log('zoo info', zoo)
-  db('zoo').insert(zoo)
+  const name = req.body;
+  console.log('name info', name)
+  db('zoos').insert(name)
       .then(ids => {
           res.status(201).json(ids);
       })
       .catch(err => {
           res.status(500).json({
-              err: 'Failed to insert zoo'
+              err: 'Failed to insert name'
           });
       });
 });
+
 
 
 

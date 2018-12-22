@@ -49,7 +49,16 @@ server.get('/api/zoos/:id', (req, res) => {
 })
 
 // UPDATE ZOO NAME]
-server.put('')
+server.put('/api/zoos/:id', (req, res) => {
+  const { id } = req.params;
+  const name = req.body;
+  db('zoos').where('id', id).update(name)
+    .then(rows => {
+    res.status(201).json({message: 'Update Successful'})
+    }).catch(err => {
+    res.status(500).json({err: "Failed to update name"})
+  })
+})
 
 
 

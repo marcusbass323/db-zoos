@@ -11,6 +11,8 @@ server.use(helmet());
 
 const port = 3300;
 
+
+// ZOO PUT REQUEST
 server.post('/api/zoos', (req, res) => {
   const name = req.body;
   console.log('name info', name)
@@ -25,6 +27,8 @@ server.post('/api/zoos', (req, res) => {
       });
 });
 
+//GET ZOO NAMES
+
 server.get('/api/zoos', (req, res) => {
   db('zoos').then(rows => {
     res.json(rows);
@@ -33,6 +37,19 @@ server.get('/api/zoos', (req, res) => {
   });
 });
 
+//GET ZOO NAMES BY ID
+server.get('/api/zoos/:id', (req, res) => {
+  const { id } = req.params;
+  db('zoos').where('id', id)
+    .then(rows => {
+      res.json(rows);
+    }).catch(err => {
+      res.status(500),json({err: 'Failed to find zoo names'})
+  })
+})
+
+// UPDATE ZOO NAME]
+server.put('')
 
 
 

@@ -25,6 +25,14 @@ server.post('/api/zoos', (req, res) => {
       });
 });
 
+server.get('/api/zoos', (req, res) => {
+  db('zoos').then(rows => {
+    res.json(rows);
+  }).catch(err => {
+    res.status(500).json({ err: 'Failed to get names' })
+  });
+});
+
 
 
 

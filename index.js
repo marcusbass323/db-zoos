@@ -60,6 +60,17 @@ server.put('/api/zoos/:id', (req, res) => {
   })
 })
 
+//DELETE ZOO BY ID
+server.delete('/api/zoos/:id', (req, res) => {
+  const { id } = req.params;
+  const name = req.body;
+  db('zoos').where('id', id).delete(name)
+    .then(rows => {
+      res.json(rows);
+    }).catch(err => {
+      res.status(201).json({ err: 'Failed to delete zoo' })
+    });
+});
 
 
 server.listen(port, function() {
